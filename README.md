@@ -20,7 +20,7 @@ This repository presents a Smart Home System focused on enhanced security and au
 ### Components
 
 - ATMEGA 8A
-- Keypad
+- Keypad 4x4
 - Buzzers
 - Temperature sensor (NTC Thermistor Module)
 - PIR sensor
@@ -30,6 +30,9 @@ This repository presents a Smart Home System focused on enhanced security and au
 - Driver L293D
 - LED (lighting system)
 - Servo motor
+- Shift Register (74HC595N)
+- Resistors
+- Crystal 16 MHz
 
 ### Libraries Used
 

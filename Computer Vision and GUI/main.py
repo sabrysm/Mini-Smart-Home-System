@@ -170,8 +170,8 @@ class GUIApp:
         self.show_frame(self.main_frame)
 
     #intialize the serial communicate object between the arduino and the python program
-    # SerialInst=serial.Serial('COM3',9600,timeout=2)
-    # time.sleep(2)
+    SerialInst=serial.Serial('COM3',9600,timeout=2)
+    time.sleep(2)
 
     #close the camera if I closed the gui
     def on_closing(self):
@@ -277,14 +277,14 @@ class GUIApp:
         frame.pack(fill="both", expand=True)
 
     #check the password to open the door if right
-    # def check_password(self,entered_password):
-    #     with open("Password.txt", 'r') as f:
-    #         password = f.read()
-    #     if entered_password == password:
-    #         self.open_door()
-    #     else:
-    #         self.close_door()
-    #     f.close()
+    def check_password(self,entered_password):
+        with open("Password.txt", 'r') as f:
+            password = f.read()
+        if entered_password == password:
+            self.open_door()
+        else:
+            self.close_door()
+        f.close()
 
     #check if the user know the old password to update a new password
     def verify_password(self):
@@ -334,7 +334,7 @@ class GUIApp:
 
     # Method to open the door
     def open_door(self):
-        # self.SerialInst.write('1'.encode()) # Send command to Arduino to open the door
+        self.SerialInst.write('1'.encode()) # Send command to Arduino to open the door
         if self.EN and not self.door_open:
             self.door_open = True
             messagebox.showinfo("Door Control", "The door has been opened.")  # Show confirmation message
@@ -346,7 +346,7 @@ class GUIApp:
 
     # Method to close the door
     def close_door(self):
-        # self.SerialInst.write('0'.encode())  # Send command to Arduino to close the door
+        self.SerialInst.write('0'.encode())  # Send command to Arduino to close the door
         if self.EN and self.door_open:
             messagebox.showinfo("Door Control", "The door has been closed.")  # Show confirmation message
             self.canvas.create_oval(0, 0, 30, 30, fill="red")
@@ -528,11 +528,13 @@ class GUIApp:
                         else:
                             self.labelunkown.configure(text="!تم اكتشاف شخص مجهول", text_color="red")
 
-                        # if self.SerialInst.in_waiting > 0:
-                        #     password=self.SerialInst.readline().decode('utf-8').rstrip()
-                        #     if isinstance(password, str) and len(password) == 4:
-                        #         print(f"{password=}")
-                        #         self.check_password(password)
+                        if self.SerialInst.in_waiting > 0:
+                            receivedText=self.SerialInst.readline().decode('utf-8').rstrip()
+                            if isinstance(receivedText, str) and len(receivedText) == 4:
+                                print(f"{receivedText=}")
+                                self.check_password(receivedText)
+                            else:
+                                print(receivedText)
 
                         cv2.putText(image, str(userName), (x, y - 10), cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 255), 2,
                                     cv2.LINE_AA)

@@ -1,0 +1,574 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 9em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD24\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">9/14/2024</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">2:41:08 PM</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:01</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc" class="file"><acronym title="C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc">C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">70</td></tr>
+</table>
+</td>
+</table><a name="IDOR42BSDF4KBDGDFQHNB4JTGHINQWRSXOHZLXEDJM5BGQGPBLUCKG"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID2LQS4FF1D42EG5NXXH55EBVB4PHRPKCAHLK43BD1H3QED2YRVJZP">Clearance Constraint (Gap=0.203mm) (OnLayer('Bottom Layer')),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID55WG4ZU0EICZKPAY5ZXUYQNSOLTKIQONMHHCU4EQHTKMM20AX3IC">Clearance Constraint (Gap=0.203mm) (OnLayer('Top Layer')),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDWRRRI3K3ZKSOGYOGRZWFFMPKDJGFOIYDYB4P14PH2WOD5GA0S30H">Clearance Constraint (Gap=0.2mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDNTOCHCRUNPS1FLNG2MAOBP0MEGHFOACOQDYZFAJXZV20XEWQ5PDP">Clearance Constraint (Gap=0.2mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID2PM2EXRFO4GHGSEC5C1QMZX5IPPGFDAKE3QHKOICUM3PWRH0YNQG">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDQWBR5X5JOQIKDYL0LDH5HYKJZOJ4KEDGUFNUVNBRFG1CQ2A5CD2M">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDHQZJOEGYF2FPGDB3S24L0VUYOH5CV45DEGDWGCHDLSEJZBOM5SK">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDBH3HWUMGP0VPEYLNXEQRNPUEO1HYLTSQH3LM5DGJNLINZJXGXSC">Width Constraint (Min=0.089mm) (Max=2.54mm) (Preferred=0.381mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDNM2N2CNABOWVLUP5NVCW50BUQJIFXSKSLQR5CGCA1UZFMT54PD2F">Routing Topology Rule(Topology=Shortest) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDEAKSYD0ZACFLNRRGBWJJPGFZNE2KSV0ZRVME0MBD5IGKLOKC23Q">Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDN0C1DLQAAEQXOKNZKWOFKU02BNS2IVLTEZMRMJ044PIISD33DRG">Minimum Annular Ring (Minimum=0.13mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDAATL3DDPXXTVGO5YEZWWJ4AJMBF4FAVPL2NVQVCZUN5NLJICSBVE">Hole Size Constraint (Min=0.2mm) (Max=6.3mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDFMRCJ3ESDHBMKZD4PPYZOKKYRGKGKLACRVNREHP3RTPB4G15RRGO">Hole To Hole Clearance (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDQHHRGMT5ZYNOGQHHD5FFAO2N5O0U2S45WW45PNOQKAQMZHLGQ4HG">Minimum Solder Mask Sliver (Gap=0.1mm) (All),(All)</a></td>
+<td class="column2">32</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID4URKNHWKJ4TQBWYPQHI3UAU5OHR1FAPPZYOPEIFHU5ZVWGFSLBLC">Silk To Solder Mask (Clearance=0.1mm) (IsPad),(All)</a></td>
+<td class="column2">35</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDQWANUU4ZWC24J3SQ5UOEGTDODPNCPF15K3YD0LNJ2KCUAXNVPVUK">Silk to Silk (Clearance=0.1mm) (All),(All)</a></td>
+<td class="column2">2</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDGESQYKUTCVTI1CRMMSGX1DBWIOEW4HEGD5PV4MBSQHUWHNKDFSH">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID2FRRK2XBQNQF5LXIMQZSLDDRPXBFVH2BIFLCGCGI0CBYVIUYYPF">Board Clearance Constraint (Gap=0mm) (All)</a></td>
+<td class="column2">1</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID01XSXVNTGHL1GQ4YXFO1HRUT5BPVMWEF3FHK12KX3A4HY442CH5L">Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">70</td>
+</tr>
+</table><br><a name="IDQHHRGMT5ZYNOGQHHD5FFAO2N5O0U2S45WW45PNOQKAQMZHLGQ4HG"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Minimum Solder Mask Sliver (Gap=0.1mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2659.407mil|Location2.X=2664.593mil|Location1.Y=3366.894mil|Location2.Y=3372.081mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2659.407mil|Location2.X=2664.593mil|Location1.Y=3366.894mil|Location2.Y=3372.081mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.038mm &lt; 0.1mm) Between Pad NTC-1(42.951mm,35.058mm) on Top Layer And Pad NTC-2(42.951mm,34.258mm) on Top Layer [Top Solder] Mask Sliver [0.038mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2717.564mil|Location2.X=2722.751mil|Location1.Y=3388.407mil|Location2.Y=3393.593mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2717.564mil|Location2.X=2722.751mil|Location1.Y=3388.407mil|Location2.Y=3393.593mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.008mm &lt; 0.1mm) Between Pad NTC-1(42.951mm,35.058mm) on Top Layer And Via (44.298mm,35.204mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.008mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2794.414mil|Location2.X=2799.602mil|Location1.Y=3132.407mil|Location2.Y=3137.593mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2794.414mil|Location2.X=2799.602mil|Location1.Y=3132.407mil|Location2.Y=3137.593mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.038mm &lt; 0.1mm) Between Pad NTC-10(45.244mm,27.965mm) on Top Layer And Pad NTC-11(46.044mm,27.965mm) on Top Layer [Top Solder] Mask Sliver [0.038mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2762.919mil|Location2.X=2768.106mil|Location1.Y=3132.407mil|Location2.Y=3137.593mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2762.919mil|Location2.X=2768.106mil|Location1.Y=3132.407mil|Location2.Y=3137.593mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.038mm &lt; 0.1mm) Between Pad NTC-10(45.244mm,27.965mm) on Top Layer And Pad NTC-9(44.444mm,27.965mm) on Top Layer [Top Solder] Mask Sliver [0.038mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2825.91mil|Location2.X=2831.097mil|Location1.Y=3132.407mil|Location2.Y=3137.593mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2825.91mil|Location2.X=2831.097mil|Location1.Y=3132.407mil|Location2.Y=3137.593mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.038mm &lt; 0.1mm) Between Pad NTC-11(46.044mm,27.965mm) on Top Layer And Pad NTC-12(46.844mm,27.965mm) on Top Layer [Top Solder] Mask Sliver [0.038mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2857.407mil|Location2.X=2862.593mil|Location1.Y=3132.407mil|Location2.Y=3137.593mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2857.407mil|Location2.X=2862.593mil|Location1.Y=3132.407mil|Location2.Y=3137.593mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.038mm &lt; 0.1mm) Between Pad NTC-12(46.844mm,27.965mm) on Top Layer And Pad NTC-13(47.644mm,27.965mm) on Top Layer [Top Solder] Mask Sliver [0.038mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2888.903mil|Location2.X=2894.09mil|Location1.Y=3132.407mil|Location2.Y=3137.593mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2888.903mil|Location2.X=2894.09mil|Location1.Y=3132.407mil|Location2.Y=3137.593mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.038mm &lt; 0.1mm) Between Pad NTC-13(47.644mm,27.965mm) on Top Layer And Pad NTC-14(48.444mm,27.965mm) on Top Layer [Top Solder] Mask Sliver [0.038mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2920.398mil|Location2.X=2925.586mil|Location1.Y=3132.407mil|Location2.Y=3137.593mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2920.398mil|Location2.X=2925.586mil|Location1.Y=3132.407mil|Location2.Y=3137.593mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.038mm &lt; 0.1mm) Between Pad NTC-14(48.444mm,27.965mm) on Top Layer And Pad NTC-15(49.244mm,27.965mm) on Top Layer [Top Solder] Mask Sliver [0.038mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2951.894mil|Location2.X=2957.081mil|Location1.Y=3132.407mil|Location2.Y=3137.593mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2951.894mil|Location2.X=2957.081mil|Location1.Y=3132.407mil|Location2.Y=3137.593mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.038mm &lt; 0.1mm) Between Pad NTC-15(49.244mm,27.965mm) on Top Layer And Pad NTC-16(50.044mm,27.965mm) on Top Layer [Top Solder] Mask Sliver [0.038mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2997.407mil|Location2.X=3002.593mil|Location1.Y=3177.919mil|Location2.Y=3183.106mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2997.407mil|Location2.X=3002.593mil|Location1.Y=3177.919mil|Location2.Y=3183.106mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.038mm &lt; 0.1mm) Between Pad NTC-17(51.537mm,29.458mm) on Top Layer And Pad NTC-18(51.537mm,30.258mm) on Top Layer [Top Solder] Mask Sliver [0.038mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2997.407mil|Location2.X=3002.593mil|Location1.Y=3209.414mil|Location2.Y=3214.602mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2997.407mil|Location2.X=3002.593mil|Location1.Y=3209.414mil|Location2.Y=3214.602mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.038mm &lt; 0.1mm) Between Pad NTC-18(51.537mm,30.258mm) on Top Layer And Pad NTC-19(51.537mm,31.058mm) on Top Layer [Top Solder] Mask Sliver [0.038mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2997.407mil|Location2.X=3002.593mil|Location1.Y=3240.91mil|Location2.Y=3246.097mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2997.407mil|Location2.X=3002.593mil|Location1.Y=3240.91mil|Location2.Y=3246.097mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.038mm &lt; 0.1mm) Between Pad NTC-19(51.537mm,31.058mm) on Top Layer And Pad NTC-20(51.537mm,31.858mm) on Top Layer [Top Solder] Mask Sliver [0.038mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2659.407mil|Location2.X=2664.593mil|Location1.Y=3335.398mil|Location2.Y=3340.586mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2659.407mil|Location2.X=2664.593mil|Location1.Y=3335.398mil|Location2.Y=3340.586mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.038mm &lt; 0.1mm) Between Pad NTC-2(42.951mm,34.258mm) on Top Layer And Pad NTC-3(42.951mm,33.458mm) on Top Layer [Top Solder] Mask Sliver [0.038mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2997.407mil|Location2.X=3002.593mil|Location1.Y=3272.407mil|Location2.Y=3277.593mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2997.407mil|Location2.X=3002.593mil|Location1.Y=3272.407mil|Location2.Y=3277.593mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.038mm &lt; 0.1mm) Between Pad NTC-20(51.537mm,31.858mm) on Top Layer And Pad NTC-21(51.537mm,32.658mm) on Top Layer [Top Solder] Mask Sliver [0.038mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2997.407mil|Location2.X=3002.593mil|Location1.Y=3303.903mil|Location2.Y=3309.09mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2997.407mil|Location2.X=3002.593mil|Location1.Y=3303.903mil|Location2.Y=3309.09mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.038mm &lt; 0.1mm) Between Pad NTC-21(51.537mm,32.658mm) on Top Layer And Pad NTC-22(51.537mm,33.458mm) on Top Layer [Top Solder] Mask Sliver [0.038mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2997.407mil|Location2.X=3002.593mil|Location1.Y=3335.398mil|Location2.Y=3340.586mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2997.407mil|Location2.X=3002.593mil|Location1.Y=3335.398mil|Location2.Y=3340.586mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.038mm &lt; 0.1mm) Between Pad NTC-22(51.537mm,33.458mm) on Top Layer And Pad NTC-23(51.537mm,34.258mm) on Top Layer [Top Solder] Mask Sliver [0.038mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2997.407mil|Location2.X=3002.593mil|Location1.Y=3366.894mil|Location2.Y=3372.081mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2997.407mil|Location2.X=3002.593mil|Location1.Y=3366.894mil|Location2.Y=3372.081mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.038mm &lt; 0.1mm) Between Pad NTC-23(51.537mm,34.258mm) on Top Layer And Pad NTC-24(51.537mm,35.058mm) on Top Layer [Top Solder] Mask Sliver [0.038mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2951.894mil|Location2.X=2957.081mil|Location1.Y=3412.407mil|Location2.Y=3417.593mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2951.894mil|Location2.X=2957.081mil|Location1.Y=3412.407mil|Location2.Y=3417.593mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.038mm &lt; 0.1mm) Between Pad NTC-25(50.044mm,36.551mm) on Top Layer And Pad NTC-26(49.244mm,36.551mm) on Top Layer [Top Solder] Mask Sliver [0.038mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2920.398mil|Location2.X=2925.586mil|Location1.Y=3412.407mil|Location2.Y=3417.593mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2920.398mil|Location2.X=2925.586mil|Location1.Y=3412.407mil|Location2.Y=3417.593mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.038mm &lt; 0.1mm) Between Pad NTC-26(49.244mm,36.551mm) on Top Layer And Pad NTC-27(48.444mm,36.551mm) on Top Layer [Top Solder] Mask Sliver [0.038mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2888.903mil|Location2.X=2894.09mil|Location1.Y=3470.407mil|Location2.Y=3475.593mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2888.903mil|Location2.X=2894.09mil|Location1.Y=3470.407mil|Location2.Y=3475.593mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.038mm &lt; 0.1mm) Between Pad NTC-27(48.444mm,36.551mm) on Top Layer And Pad NTC-28(47.644mm,36.551mm) on Top Layer [Top Solder] Mask Sliver [0.038mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2857.407mil|Location2.X=2862.593mil|Location1.Y=3412.407mil|Location2.Y=3417.593mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2857.407mil|Location2.X=2862.593mil|Location1.Y=3412.407mil|Location2.Y=3417.593mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.038mm &lt; 0.1mm) Between Pad NTC-28(47.644mm,36.551mm) on Top Layer And Pad NTC-29(46.844mm,36.551mm) on Top Layer [Top Solder] Mask Sliver [0.038mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2825.91mil|Location2.X=2831.097mil|Location1.Y=3470.407mil|Location2.Y=3475.593mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2825.91mil|Location2.X=2831.097mil|Location1.Y=3470.407mil|Location2.Y=3475.593mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.038mm &lt; 0.1mm) Between Pad NTC-29(46.844mm,36.551mm) on Top Layer And Pad NTC-30(46.044mm,36.551mm) on Top Layer [Top Solder] Mask Sliver [0.038mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2659.407mil|Location2.X=2664.593mil|Location1.Y=3303.903mil|Location2.Y=3309.09mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2659.407mil|Location2.X=2664.593mil|Location1.Y=3303.903mil|Location2.Y=3309.09mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.038mm &lt; 0.1mm) Between Pad NTC-3(42.951mm,33.458mm) on Top Layer And Pad NTC-4(42.951mm,32.658mm) on Top Layer [Top Solder] Mask Sliver [0.038mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2794.414mil|Location2.X=2799.602mil|Location1.Y=3412.407mil|Location2.Y=3417.593mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2794.414mil|Location2.X=2799.602mil|Location1.Y=3412.407mil|Location2.Y=3417.593mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.038mm &lt; 0.1mm) Between Pad NTC-30(46.044mm,36.551mm) on Top Layer And Pad NTC-31(45.244mm,36.551mm) on Top Layer [Top Solder] Mask Sliver [0.038mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2762.919mil|Location2.X=2768.106mil|Location1.Y=3412.407mil|Location2.Y=3417.593mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2762.919mil|Location2.X=2768.106mil|Location1.Y=3412.407mil|Location2.Y=3417.593mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.038mm &lt; 0.1mm) Between Pad NTC-31(45.244mm,36.551mm) on Top Layer And Pad NTC-32(44.444mm,36.551mm) on Top Layer [Top Solder] Mask Sliver [0.038mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2741.407mil|Location2.X=2746.593mil|Location1.Y=3412.249mil|Location2.Y=3417.436mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2741.407mil|Location2.X=2746.593mil|Location1.Y=3412.249mil|Location2.Y=3417.436mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.008mm &lt; 0.1mm) Between Pad NTC-32(44.444mm,36.551mm) on Top Layer And Via (44.298mm,35.204mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.008mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2659.407mil|Location2.X=2664.593mil|Location1.Y=3272.407mil|Location2.Y=3277.593mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2659.407mil|Location2.X=2664.593mil|Location1.Y=3272.407mil|Location2.Y=3277.593mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.038mm &lt; 0.1mm) Between Pad NTC-4(42.951mm,32.658mm) on Top Layer And Pad NTC-5(42.951mm,31.858mm) on Top Layer [Top Solder] Mask Sliver [0.038mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2659.407mil|Location2.X=2664.593mil|Location1.Y=3240.91mil|Location2.Y=3246.097mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2659.407mil|Location2.X=2664.593mil|Location1.Y=3240.91mil|Location2.Y=3246.097mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.038mm &lt; 0.1mm) Between Pad NTC-5(42.951mm,31.858mm) on Top Layer And Pad NTC-6(42.951mm,31.058mm) on Top Layer [Top Solder] Mask Sliver [0.038mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2659.407mil|Location2.X=2664.593mil|Location1.Y=3209.414mil|Location2.Y=3214.602mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2659.407mil|Location2.X=2664.593mil|Location1.Y=3209.414mil|Location2.Y=3214.602mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.038mm &lt; 0.1mm) Between Pad NTC-6(42.951mm,31.058mm) on Top Layer And Pad NTC-7(42.951mm,30.258mm) on Top Layer [Top Solder] Mask Sliver [0.038mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2659.407mil|Location2.X=2664.593mil|Location1.Y=3177.919mil|Location2.Y=3183.106mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2659.407mil|Location2.X=2664.593mil|Location1.Y=3177.919mil|Location2.Y=3183.106mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.038mm &lt; 0.1mm) Between Pad NTC-7(42.951mm,30.258mm) on Top Layer And Pad NTC-8(42.951mm,29.458mm) on Top Layer [Top Solder] Mask Sliver [0.038mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2658.65mil|Location2.X=2663.837mil|Location1.Y=3178.568mil|Location2.Y=3183.755mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2658.65mil|Location2.X=2663.837mil|Location1.Y=3178.568mil|Location2.Y=3183.755mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.039mm &lt; 0.1mm) Between Pad NTC-7(42.951mm,30.258mm) on Top Layer And Via (41.58mm,29.794mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.039mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2658.749mil|Location2.X=2663.936mil|Location1.Y=3175.407mil|Location2.Y=3180.593mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2658.749mil|Location2.X=2663.936mil|Location1.Y=3175.407mil|Location2.Y=3180.593mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.033mm &lt; 0.1mm) Between Pad NTC-8(42.951mm,29.458mm) on Top Layer And Via (41.58mm,29.794mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.033mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID4URKNHWKJ4TQBWYPQHI3UAU5OHR1FAPPZYOPEIFHU5ZVWGFSLBLC"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=0.1mm) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2714.91mil|Location2.X=2720.097mil|Location1.Y=3371.642mil|Location2.Y=3376.829mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2714.91mil|Location2.X=2720.097mil|Location1.Y=3371.642mil|Location2.Y=3376.829mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.076mm &lt; 0.1mm) Between Pad NTC-1(42.951mm,35.058mm) on Top Layer And Track (43.739mm,28.753mm)(43.739mm,35.408mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2715.049mil|Location2.X=2721.851mil|Location1.Y=3392.253mil|Location2.Y=3399.59mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2715.049mil|Location2.X=2721.851mil|Location1.Y=3392.253mil|Location2.Y=3399.59mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.092mm &lt; 0.1mm) Between Pad NTC-1(42.951mm,35.058mm) on Top Layer And Track (43.739mm,35.408mm)(44.094mm,35.763mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.092mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2767.666mil|Location2.X=2772.854mil|Location1.Y=3129.91mil|Location2.Y=3135.097mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2767.666mil|Location2.X=2772.854mil|Location1.Y=3129.91mil|Location2.Y=3135.097mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.076mm &lt; 0.1mm) Between Pad NTC-10(45.244mm,27.965mm) on Top Layer And Track (43.739mm,28.753mm)(50.749mm,28.753mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2799.162mil|Location2.X=2804.349mil|Location1.Y=3129.91mil|Location2.Y=3135.097mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2799.162mil|Location2.X=2804.349mil|Location1.Y=3129.91mil|Location2.Y=3135.097mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.076mm &lt; 0.1mm) Between Pad NTC-11(46.044mm,27.965mm) on Top Layer And Track (43.739mm,28.753mm)(50.749mm,28.753mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2830.659mil|Location2.X=2835.845mil|Location1.Y=3129.91mil|Location2.Y=3135.097mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2830.659mil|Location2.X=2835.845mil|Location1.Y=3129.91mil|Location2.Y=3135.097mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.076mm &lt; 0.1mm) Between Pad NTC-12(46.844mm,27.965mm) on Top Layer And Track (43.739mm,28.753mm)(50.749mm,28.753mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2862.155mil|Location2.X=2867.341mil|Location1.Y=3129.91mil|Location2.Y=3135.097mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2862.155mil|Location2.X=2867.341mil|Location1.Y=3129.91mil|Location2.Y=3135.097mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.076mm &lt; 0.1mm) Between Pad NTC-13(47.644mm,27.965mm) on Top Layer And Track (43.739mm,28.753mm)(50.749mm,28.753mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2893.651mil|Location2.X=2898.838mil|Location1.Y=3129.91mil|Location2.Y=3135.097mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2893.651mil|Location2.X=2898.838mil|Location1.Y=3129.91mil|Location2.Y=3135.097mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.076mm &lt; 0.1mm) Between Pad NTC-14(48.444mm,27.965mm) on Top Layer And Track (43.739mm,28.753mm)(50.749mm,28.753mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2925.146mil|Location2.X=2930.334mil|Location1.Y=3129.91mil|Location2.Y=3135.097mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2925.146mil|Location2.X=2930.334mil|Location1.Y=3129.91mil|Location2.Y=3135.097mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.076mm &lt; 0.1mm) Between Pad NTC-15(49.244mm,27.965mm) on Top Layer And Track (43.739mm,28.753mm)(50.749mm,28.753mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2956.642mil|Location2.X=2961.829mil|Location1.Y=3129.91mil|Location2.Y=3135.097mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2956.642mil|Location2.X=2961.829mil|Location1.Y=3129.91mil|Location2.Y=3135.097mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.076mm &lt; 0.1mm) Between Pad NTC-16(50.044mm,27.965mm) on Top Layer And Track (43.739mm,28.753mm)(50.749mm,28.753mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2999.903mil|Location2.X=3005.09mil|Location1.Y=3151.171mil|Location2.Y=3156.358mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2999.903mil|Location2.X=3005.09mil|Location1.Y=3151.171mil|Location2.Y=3156.358mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.076mm &lt; 0.1mm) Between Pad NTC-17(51.537mm,29.458mm) on Top Layer And Track (50.749mm,28.753mm)(50.749mm,35.763mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2999.903mil|Location2.X=3005.09mil|Location1.Y=3182.666mil|Location2.Y=3187.854mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2999.903mil|Location2.X=3005.09mil|Location1.Y=3182.666mil|Location2.Y=3187.854mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.076mm &lt; 0.1mm) Between Pad NTC-18(51.537mm,30.258mm) on Top Layer And Track (50.749mm,28.753mm)(50.749mm,35.763mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2999.903mil|Location2.X=3005.09mil|Location1.Y=3214.162mil|Location2.Y=3219.349mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2999.903mil|Location2.X=3005.09mil|Location1.Y=3214.162mil|Location2.Y=3219.349mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.076mm &lt; 0.1mm) Between Pad NTC-19(51.537mm,31.058mm) on Top Layer And Track (50.749mm,28.753mm)(50.749mm,35.763mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2714.91mil|Location2.X=2720.097mil|Location1.Y=3340.146mil|Location2.Y=3345.334mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2714.91mil|Location2.X=2720.097mil|Location1.Y=3340.146mil|Location2.Y=3345.334mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.076mm &lt; 0.1mm) Between Pad NTC-2(42.951mm,34.258mm) on Top Layer And Track (43.739mm,28.753mm)(43.739mm,35.408mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2999.903mil|Location2.X=3005.09mil|Location1.Y=3245.659mil|Location2.Y=3250.845mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2999.903mil|Location2.X=3005.09mil|Location1.Y=3245.659mil|Location2.Y=3250.845mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.076mm &lt; 0.1mm) Between Pad NTC-20(51.537mm,31.858mm) on Top Layer And Track (50.749mm,28.753mm)(50.749mm,35.763mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2999.903mil|Location2.X=3005.09mil|Location1.Y=3277.155mil|Location2.Y=3282.341mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2999.903mil|Location2.X=3005.09mil|Location1.Y=3277.155mil|Location2.Y=3282.341mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.076mm &lt; 0.1mm) Between Pad NTC-21(51.537mm,32.658mm) on Top Layer And Track (50.749mm,28.753mm)(50.749mm,35.763mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2999.903mil|Location2.X=3005.09mil|Location1.Y=3308.651mil|Location2.Y=3313.838mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2999.903mil|Location2.X=3005.09mil|Location1.Y=3308.651mil|Location2.Y=3313.838mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.076mm &lt; 0.1mm) Between Pad NTC-22(51.537mm,33.458mm) on Top Layer And Track (50.749mm,28.753mm)(50.749mm,35.763mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2999.903mil|Location2.X=3005.09mil|Location1.Y=3340.146mil|Location2.Y=3345.334mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2999.903mil|Location2.X=3005.09mil|Location1.Y=3340.146mil|Location2.Y=3345.334mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.076mm &lt; 0.1mm) Between Pad NTC-23(51.537mm,34.258mm) on Top Layer And Track (50.749mm,28.753mm)(50.749mm,35.763mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2999.903mil|Location2.X=3005.09mil|Location1.Y=3371.642mil|Location2.Y=3376.829mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2999.903mil|Location2.X=3005.09mil|Location1.Y=3371.642mil|Location2.Y=3376.829mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.076mm &lt; 0.1mm) Between Pad NTC-24(51.537mm,35.058mm) on Top Layer And Track (50.749mm,28.753mm)(50.749mm,35.763mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2978.642mil|Location2.X=2983.829mil|Location1.Y=3414.903mil|Location2.Y=3420.09mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2978.642mil|Location2.X=2983.829mil|Location1.Y=3414.903mil|Location2.Y=3420.09mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.076mm &lt; 0.1mm) Between Pad NTC-25(50.044mm,36.551mm) on Top Layer And Track (44.094mm,35.763mm)(50.749mm,35.763mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2947.146mil|Location2.X=2952.334mil|Location1.Y=3414.903mil|Location2.Y=3420.09mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2947.146mil|Location2.X=2952.334mil|Location1.Y=3414.903mil|Location2.Y=3420.09mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.076mm &lt; 0.1mm) Between Pad NTC-26(49.244mm,36.551mm) on Top Layer And Track (44.094mm,35.763mm)(50.749mm,35.763mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2915.651mil|Location2.X=2920.838mil|Location1.Y=3414.903mil|Location2.Y=3420.09mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2915.651mil|Location2.X=2920.838mil|Location1.Y=3414.903mil|Location2.Y=3420.09mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.076mm &lt; 0.1mm) Between Pad NTC-27(48.444mm,36.551mm) on Top Layer And Track (44.094mm,35.763mm)(50.749mm,35.763mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2884.155mil|Location2.X=2889.341mil|Location1.Y=3414.903mil|Location2.Y=3420.09mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2884.155mil|Location2.X=2889.341mil|Location1.Y=3414.903mil|Location2.Y=3420.09mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.076mm &lt; 0.1mm) Between Pad NTC-28(47.644mm,36.551mm) on Top Layer And Track (44.094mm,35.763mm)(50.749mm,35.763mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2852.659mil|Location2.X=2857.845mil|Location1.Y=3414.903mil|Location2.Y=3420.09mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2852.659mil|Location2.X=2857.845mil|Location1.Y=3414.903mil|Location2.Y=3420.09mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.076mm &lt; 0.1mm) Between Pad NTC-29(46.844mm,36.551mm) on Top Layer And Track (44.094mm,35.763mm)(50.749mm,35.763mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2714.91mil|Location2.X=2720.097mil|Location1.Y=3308.651mil|Location2.Y=3313.838mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2714.91mil|Location2.X=2720.097mil|Location1.Y=3308.651mil|Location2.Y=3313.838mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.076mm &lt; 0.1mm) Between Pad NTC-3(42.951mm,33.458mm) on Top Layer And Track (43.739mm,28.753mm)(43.739mm,35.408mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2821.162mil|Location2.X=2826.349mil|Location1.Y=3414.903mil|Location2.Y=3420.09mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2821.162mil|Location2.X=2826.349mil|Location1.Y=3414.903mil|Location2.Y=3420.09mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.076mm &lt; 0.1mm) Between Pad NTC-30(46.044mm,36.551mm) on Top Layer And Track (44.094mm,35.763mm)(50.749mm,35.763mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2789.666mil|Location2.X=2794.854mil|Location1.Y=3414.903mil|Location2.Y=3420.09mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2789.666mil|Location2.X=2794.854mil|Location1.Y=3414.903mil|Location2.Y=3420.09mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.076mm &lt; 0.1mm) Between Pad NTC-31(45.244mm,36.551mm) on Top Layer And Track (44.094mm,35.763mm)(50.749mm,35.763mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2735.41mil|Location2.X=2742.789mil|Location1.Y=3413.24mil|Location2.Y=3419.951mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2735.41mil|Location2.X=2742.789mil|Location1.Y=3413.24mil|Location2.Y=3419.951mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.092mm &lt; 0.1mm) Between Pad NTC-32(44.444mm,36.551mm) on Top Layer And Track (43.739mm,35.408mm)(44.094mm,35.763mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.092mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2758.171mil|Location2.X=2763.358mil|Location1.Y=3414.903mil|Location2.Y=3420.09mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2758.171mil|Location2.X=2763.358mil|Location1.Y=3414.903mil|Location2.Y=3420.09mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.076mm &lt; 0.1mm) Between Pad NTC-32(44.444mm,36.551mm) on Top Layer And Track (44.094mm,35.763mm)(50.749mm,35.763mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2714.91mil|Location2.X=2720.097mil|Location1.Y=3277.155mil|Location2.Y=3282.341mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2714.91mil|Location2.X=2720.097mil|Location1.Y=3277.155mil|Location2.Y=3282.341mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.076mm &lt; 0.1mm) Between Pad NTC-4(42.951mm,32.658mm) on Top Layer And Track (43.739mm,28.753mm)(43.739mm,35.408mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2714.91mil|Location2.X=2720.097mil|Location1.Y=3245.659mil|Location2.Y=3250.845mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2714.91mil|Location2.X=2720.097mil|Location1.Y=3245.659mil|Location2.Y=3250.845mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.076mm &lt; 0.1mm) Between Pad NTC-5(42.951mm,31.858mm) on Top Layer And Track (43.739mm,28.753mm)(43.739mm,35.408mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2714.91mil|Location2.X=2720.097mil|Location1.Y=3214.162mil|Location2.Y=3219.349mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2714.91mil|Location2.X=2720.097mil|Location1.Y=3214.162mil|Location2.Y=3219.349mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.076mm &lt; 0.1mm) Between Pad NTC-6(42.951mm,31.058mm) on Top Layer And Track (43.739mm,28.753mm)(43.739mm,35.408mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2714.91mil|Location2.X=2720.097mil|Location1.Y=3182.666mil|Location2.Y=3187.854mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2714.91mil|Location2.X=2720.097mil|Location1.Y=3182.666mil|Location2.Y=3187.854mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.076mm &lt; 0.1mm) Between Pad NTC-7(42.951mm,30.258mm) on Top Layer And Track (43.739mm,28.753mm)(43.739mm,35.408mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2714.91mil|Location2.X=2720.097mil|Location1.Y=3151.171mil|Location2.Y=3156.358mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2714.91mil|Location2.X=2720.097mil|Location1.Y=3151.171mil|Location2.Y=3156.358mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.076mm &lt; 0.1mm) Between Pad NTC-8(42.951mm,29.458mm) on Top Layer And Track (43.739mm,28.753mm)(43.739mm,35.408mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2736.171mil|Location2.X=2741.358mil|Location1.Y=3129.91mil|Location2.Y=3135.097mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2736.171mil|Location2.X=2741.358mil|Location1.Y=3129.91mil|Location2.Y=3135.097mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.076mm &lt; 0.1mm) Between Pad NTC-9(44.444mm,27.965mm) on Top Layer And Track (43.739mm,28.753mm)(50.749mm,28.753mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3710.794mil|Location2.X=3715.981mil|Location1.Y=3628.369mil|Location2.Y=3633.556mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3710.794mil|Location2.X=3715.981mil|Location1.Y=3628.369mil|Location2.Y=3633.556mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.082mm &lt; 0.1mm) Between Pad P2-6(70.006mm,41.402mm) on Multi-Layer And Text "Power source" (60.706mm,40.91mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.082mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDQWANUU4ZWC24J3SQ5UOEGTDODPNCPF15K3YD0LNJ2KCUAXNVPVUK"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk to Silk (Clearance=0.1mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1796.022mil|Location2.X=1799.646mil|Location1.Y=2663.509mil|Location2.Y=2667.134mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1796.022mil|Location2.X=1799.646mil|Location1.Y=2663.509mil|Location2.Y=2667.134mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.1mm) Between Text "Buzzer" (18.841mm,16.772mm) on Top Overlay And Track (20.265mm,16.117mm)(20.265mm,18.597mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1913.188mil|Location2.X=1916.812mil|Location1.Y=3837.204mil|Location2.Y=3840.829mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1913.188mil|Location2.X=1916.812mil|Location1.Y=3837.204mil|Location2.Y=3840.829mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.1mm) Between Text "Reset" (23.241mm,45.609mm) on Top Overlay And Track (18.209mm,46.657mm)(24.209mm,46.657mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID2FRRK2XBQNQF5LXIMQZSLDDRPXBFVH2BIFLCGCGI0CBYVIUYYPF"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Board Clearance Constraint (Gap=0mm) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=994.661mil|Location2.X=1003.535mil|Location1.Y=4358.753mil|Location2.Y=4367.627mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\PolaNasser\Desktop\Pola Nasser\Mini smart home\PCB smart home.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=994.661mil|Location2.X=1003.535mil|Location1.Y=4358.753mil|Location2.Y=4367.627mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.3mm) Between Board Edge And Text "*" (0.208mm,59.136mm) on Top Overlay </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>

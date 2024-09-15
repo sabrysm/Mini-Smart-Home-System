@@ -1,0 +1,26 @@
+Added Component: Designator=*(RGB LED)
+Add component (AddParameter): Name = "Manufacturer"; Value = "Cree LED"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Product Number"; Value = "UHD1110-FKA-CL1A13R3Q1BBQFMF3"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Supplier"; Value = "SnapMagic"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Supplier Part Number"; Value = "UHD1110-FKA-CL1A13R3Q1BBQFMF3DKR-ND"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=Net*_2 Pin=*-2
+Added Pin To Net: NetName=Net*_3 Pin=*-3
+Added Pin To Net: NetName=2 Pin=*-4
+Add Net: Net with name "Net*_1" already exists
+Added Member To Class: ClassName=sch smart home Member=Component * Buzzer smd
+Added Member To Class: ClassName=sch smart home Member=Component * RGB LED
+Added Member To Class: ClassName=sch smart home Member=Component * PIR sensor
+Added Member To Class: ClassName=sch smart home Member=Component * ATMEGA 8A SMD
+Added Member To Class: ClassName=sch smart home Member=Component * LDR sensor
+Added Member To Class: ClassName=sch smart home Member=Component * Driver L293D
+Added Member To Class: ClassName=sch smart home Member=Component * NTC smd
+Added Member To Class: ClassName=sch smart home Member=Component C? 30pF Capcitor
+Added Member To Class: ClassName=sch smart home Member=Component J? 399-43-102-10-003000
+Added Member To Class: ClassName=sch smart home Member=Component P? 691701340008B
+Added Member To Class: ClassName=sch smart home Member=Component R? 10K ohm
+Added Member To Class: ClassName=sch smart home Member=Component R? 10K ohm
+Added Member To Class: ClassName=sch smart home Member=Component R? 10K ohm
+Added Member To Class: ClassName=sch smart home Member=Component R? 220 ohm
+Added Member To Class: ClassName=sch smart home Member=Component R? 220 ohm
+Added Member To Class: ClassName=sch smart home Member=Component R? 10K ohm
+Added Member To Class: ClassName=sch smart home Member=Component R? 220 ohm

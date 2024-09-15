@@ -1,0 +1,51 @@
+Removed Pin From Net: NetName=out1 Pin=P?-5
+Removed Pin From Net: NetName=out2 Pin=P?-6
+Change Component Designator: OldDesignator=R1 NewDesignator=R?
+Added Component: Designator=P?(691701340008B)
+Add component (AddParameter): Name = "Color"; Value = "Black"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Connector Type"; Value = "Terminal Block"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Contact Material"; Value = "Brass"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Contact Plating"; Value = "Tin"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Current Rating"; Value = "10A"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Gender"; Value = "Male"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Housing Material"; Value = "Polymer"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Lead Pitch"; Value = "3.81mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mount"; Value = "Through Hole"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "NexarPartId"; Value = "22866725"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Number of Contacts"; Value = "8"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Number of Pins"; Value = "8"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Packaging"; Value = "Tape and Reel"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "REACH SVHC"; Value = "Unknown"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "RoHS"; Value = "Compliant"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Termination"; Value = "PCB"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Voltage Rating"; Value = "300V"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=out1 Pin=*-3
+Added Pin To Net: NetName=column4 Pin=*-13
+Added Pin To Net: NetName=row1 Pin=P?-1
+Added Pin To Net: NetName=row2 Pin=P?-2
+Added Pin To Net: NetName=row3 Pin=P?-3
+Added Pin To Net: NetName=out1 Pin=P?-4
+Added Pin To Net: NetName=row4 Pin=P?-4
+Added Pin To Net: NetName=column1 Pin=P?-5
+Added Pin To Net: NetName=out2 Pin=P?-5
+Added Pin To Net: NetName=1 Pin=P?-6
+Added Pin To Net: NetName=column2 Pin=P?-6
+Added Pin To Net: NetName=column3 Pin=P?-7
+Added Pin To Net: NetName=column4 Pin=P?-8
+Added Member To Class: ClassName=sch smart home Member=Component * RGB LED
+Added Member To Class: ClassName=sch smart home Member=Component * ATMEGA 8A SMD
+Added Member To Class: ClassName=sch smart home Member=Component * LDR sensor
+Added Member To Class: ClassName=sch smart home Member=Component * Driver L293D
+Added Member To Class: ClassName=sch smart home Member=Component * PIR sensor
+Added Member To Class: ClassName=sch smart home Member=Component * Buzzer smd
+Added Member To Class: ClassName=sch smart home Member=Component * NTC smd
+Added Member To Class: ClassName=sch smart home Member=Component C? 30pF Capcitor
+Added Member To Class: ClassName=sch smart home Member=Component J? 399-43-102-10-003000
+Added Member To Class: ClassName=sch smart home Member=Component P? 691701340008B
+Added Member To Class: ClassName=sch smart home Member=Component P? 691701340008B
+Added Member To Class: ClassName=sch smart home Member=Component R? 10K ohm
+Added Member To Class: ClassName=sch smart home Member=Component R? 220 ohm
+Added Member To Class: ClassName=sch smart home Member=Component R? 220 ohm
+Added Member To Class: ClassName=sch smart home Member=Component R? 10K ohm
+Added Member To Class: ClassName=sch smart home Member=Component R? 10K ohm
+Added Member To Class: ClassName=sch smart home Member=Component R? 10K ohm

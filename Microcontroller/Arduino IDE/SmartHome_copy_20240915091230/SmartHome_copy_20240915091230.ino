@@ -86,18 +86,21 @@ void checkPassword(char keyPressed) {
     if (keyPressed == '#') {
         // Validate the entered password
         if (inputPos == 4) {  // Only check if exactly 4 digits are entered
-            Serial.print(F("Entered password: "));
-            Serial.println(inputPassword);
-
             // Send data to Python serial
             Serial.println(inputPassword);
-
+            if (Serial.available() > 0) {
+              char data = Serial.read();  // Read the incoming data
+              // Incorrect Password 
+              if (data == '2') {
+                triggerBuzzer();  // trigger the buzzer
+              }
+            }
         } 
-        // else {
-        //     Serial.println(F("Password must be exactly 4 digits."));
-        //     triggerBuzzer();        // Alert with buzzer
-        //     turnOffAll();
-        // }
+        else {
+            Serial.println(F("Password must be exactly 4 digits."));
+            triggerBuzzer();        // Alert with buzzer
+            // turnOffAll();
+        }
         resetPassword();  // Reset password input after checking
     } else if (keyPressed == '*') {
         resetPassword();  // Reset if '*' is pressed
@@ -118,12 +121,13 @@ void checkFace() {
     char data = Serial.read();  // Read the incoming data
     
     if (data == '1' && !doorOpen) {
+      makeDoorState("open");
       Serial.println("Face Recognized");
       triggerBuzzer();    // Alert with buzzer
-      makeDoorState("open");
       delay(500);         // Keep it open for 500ms
     } else if (data == '0' && doorOpen) {
       Serial.println("Face Unrecognized");
+      triggerBuzzer();
       turnOffAll();       // Turn off all components
     }
   }
@@ -142,13 +146,13 @@ void triggerBuzzer() {
 
 // Function to turn off all components
 void turnOffAll() {
+    makeDoorState("off");
     setWhiteLed(false);
     setBlueLed(false);
     setGreenLed(false);
     setRedLed(false);
     setBuzzer(false);
     setMotor(false);    // Stop motor
-    makeDoorState("off");
 }
 
 
@@ -195,8 +199,8 @@ void checkLightIntensity() {
 
 void controlRgbLedBuzzerAndFan(float temperatureC) {
     // Turn off all LEDs before setting the correct one
-    Serial.println(F("Tempreature:"));
-    Serial.println(temperatureC);
+    // Serial.println(F("Tempreature:"));
+    // Serial.println(temperatureC);
     if (temperatureC > 40) {
         setRedLed(true);
         setGreenLed(false);

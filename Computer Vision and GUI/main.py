@@ -24,6 +24,7 @@ class GUIApp:
         self.face_encodings = []  #list store face encoding in the camera
         self.boolean = False  #flag represent if the frame should be the main frame or not
         self.cap_encoding = []  #another list store face encoding in the camera(when using capture function only)
+        self.inputPassword = "" #store the password entered by the user
         ########################################################
         #main frame
         self.main_frame = tk.CTkFrame(root)
@@ -38,7 +39,7 @@ class GUIApp:
         mind = mind.resize((300, 200))
         mind = ImageTk.PhotoImage(mind)
         label = tk.CTkLabel(self.main_frame, image=mind, text="")
-        label.pack(pady=50)
+        label.pack(pady=70, side="bottom")
 
         # Button to manually change the password
         self.btn_change_password = tk.CTkButton(self.main_frame, text="Change Password",
@@ -83,7 +84,7 @@ class GUIApp:
         bg_color = self.main_frame.cget("fg_color")[0]
         self.canvas = tk.CTkCanvas(self.main_frame, width=30, height=30, bg=bg_color, highlightthickness=0)
         self.canvas.create_oval(0, 0, 30, 30, fill="red")
-        self.canvas.place(x=900, y=30)
+        self.canvas.place(x=1100, y=30)
 
         ########################################################
         #verify frame
@@ -530,8 +531,11 @@ class GUIApp:
 
                         if self.SerialInst.in_waiting > 0:
                             receivedText=self.SerialInst.readline().decode('utf-8').rstrip()
+                            if receivedText == "Key pressed: #":
+                                self.check_password(receivedText)
                             if isinstance(receivedText, str) and len(receivedText) == 4:
                                 print(f"{receivedText=}")
+                                self.inputPassword = receivedText
                                 self.check_password(receivedText)
                             else:
                                 print(receivedText)
